@@ -45,8 +45,10 @@ public class main {
 				
 			// new calculation
 				
-				// changed log2 to log10. It should be log base ten, not 2.
-				float l = (float) (1 + Math.log10(stats.getTotalTermFreq()));
+				// changed log2 to log10. It should be log base ten, not two.
+				// Also I think that you should be taking the log of the term
+				// frequency and not the total term frequency.
+				float l = (float) (1 + Math.log10(freq));
 				
 				// According to the specs, getValueForNormalization returns the sum of
 				// the squared weights. So you still need to take the sqaure root of it 
@@ -56,7 +58,7 @@ public class main {
 				
 				// n is supposed to be 1 so there isn't any need to include it in calculations.
 				
-				//returning the score
+				// returning the lnc value
 				return (l * c);
 			}
 		};
@@ -76,12 +78,27 @@ public class main {
 
 			@Override
 			protected float score(BasicStats stats, float freq, float docLen) {
-				// TODO Auto-generated method stub
-				float l = (float) (1 + log2(stats.getTotalTermFreq()));
-				float t = (float) log2((stats.getNumberOfDocuments()) / (stats.getDocFreq()));
-				float n = 1.0f;
-				float ltn = (l * t * n);
-				return ltn;
+			// old calculation
+				// float l = (float) (1 + log2(stats.getTotalTermFreq()));
+				// float t = (float) log2((stats.getNumberOfDocuments()) / (stats.getDocFreq()));
+				// float n = 1.0f;
+				// float ltn = (l * t * n);
+				// return ltn;
+				
+			// new calculation
+				
+				// changed log2 to log10. It should be log base ten, not two.
+				// Also I think that you should be taking the log of the term
+				// frequency and not the total term frequency.
+				float l = (float) (1 + Math.log10(freq));
+				
+				// should be log ten, not two.
+				float t = (float) Math.log10((stats.getNumberOfDocuments()) / (stats.getDocFreq()));
+				
+				// n is supposed to be 1 so there isn't any need to include it in calculations.
+				
+				//returning the ltn value
+				return (l * t );
 			}
 		};
 		
