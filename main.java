@@ -36,17 +36,28 @@ public class main {
 
 			@Override
 			protected float score(BasicStats stats, float freq, float docLen) {
-				// old calculation
+			// old calculation
 				// float l = (float) (1 + log2(stats.getTotalTermFreq()));
 				// float n = 1.0f;
 				// float c = stats.getValueForNormalization();
 				// float lnc = (l * n * c); 
+				// return lnc
 				
-				// new calculation
+			// new calculation
+				
+				// changed log2 to log10. It should be log base ten, not 2.
 				float l = (float) (1 + Math.log10(stats.getTotalTermFreq()));
-				float c = stats.getValueForNormalization();
-				float lnc = (l * c);
-				return lnc;
+				
+				// According to the specs, getValueForNormalization returns the sum of
+				// the squared weights. So you still need to take the sqaure root of it 
+				// and divide 1 by it. If it is always returning 1 or zero then the weights
+				// aren't being properly added/calculated.
+				float c = (1 / (Math.sqrt(stats.getValueForNormalization())));
+				
+				// n is supposed to be 1 so there isn't any need to include it in calculations.
+				
+				//returning the score
+				return (l * c);
 			}
 		};
 		
