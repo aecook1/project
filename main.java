@@ -36,17 +36,16 @@ public class main {
 
 			@Override
 			protected float score(BasicStats stats, float freq, float docLen) {
-				/*
-				float l = (float) (1 + log2(stats.getTotalTermFreq()));
-				float n = 1.0f;
-				float c = stats.getValueForNormalization();
-				float lnc = (l * n * c); 
-				*/
+				// old calculation
+				// float l = (float) (1 + log2(stats.getTotalTermFreq()));
+				// float n = 1.0f;
+				// float c = stats.getValueForNormalization();
+				// float lnc = (l * n * c); 
+				
+				// new calculation
 				float l = (float) (1 + Math.log10(stats.getTotalTermFreq()));
-				float n = 1.0f;
 				float c = stats.getValueForNormalization();
-				float lnc = (l * n * c);
-
+				float lnc = (l * c);
 				return lnc;
 			}
 		};
