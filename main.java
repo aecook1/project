@@ -44,7 +44,6 @@ public class main {
 				// return lnc
 				
 			// new calculation
-				
 				// changed log2 to log10. It should be log base ten, not two.
 				// Also I think that you should be taking the log of the term
 				// frequency and not the total term frequency.
